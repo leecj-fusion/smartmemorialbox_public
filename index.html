@@ -2,18 +2,19 @@
 <html>
   <head>
     <title>Smart Memorial Box - QR Scan</title>
-	<meta name="viewport" content="width=320, initial-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=320, initial-scale=1, user-scalable=no">
+  
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/3.3.3/adapter.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
     <script type="text/javascript" src="js/qrscan.min.js"></script>
     <!-- <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script> -->
+
     <style>
       body {
         margin: 0;
         padding: 0;
         /* position:fixed;overflow:hidden;width: 100vw; height: 100vh; */
         background: #000000;
-
       }
 
       .bb {
@@ -26,14 +27,10 @@
       text-align: center;
     } */
 
-
-
       html {
         overflow-x: hidden;
         overflow-y: hidden;
       }
-
-
 
       .content {
         width: 100vw;
@@ -42,8 +39,8 @@
 
       .grid {
         display: grid;
-        grid-template-rows: 4vh 8vh 80vh 8vh;
-        grid-template-columns: 95vw;
+        grid-template-rows: 100vh;
+        grid-template-columns: 100vw;
         justify-content: center;
         align-items: center;
 
@@ -51,36 +48,31 @@
       }
 
       .item {
-         /* border: 1px dotted #990099; */
+         border: 0px dotted #990099;
       }
 
-      .item:nth-child(1){ align-self: stretch; justify-self: stretch; vertical-align: middle; text-align: center; margin: 5px;}
-      .item:nth-child(2){ align-self: stretch; justify-self: stretch; vertical-align: middle; text-align: center; margin: 5px;}
-      .item:nth-child(3){ align-self: stretch; justify-self: stretch; vertical-align: middle; text-align: center; margin: 5px; }
-      .item:nth-child(4){ align-self: stretch; justify-self: stretch; vertical-align: middle; text-align: center; margin: 5px; }
-      .item:nth-child(5){ align-self: stretch; justify-self: stretch; vertical-align: middle; text-align: center; margin: 5px; }
+      .item:nth-child(1){ align-self: start; justify-self: stretch; vertical-align: middle; text-align: center; margin: 10px; grid-row: 1; grid-column: 1;}
+      .item:nth-child(2){ align-self: center; justify-self: stretch; vertical-align: middle; text-align: center; margin: 0px; grid-row: 1; grid-column: 1;}
+      .item:nth-child(3){ align-self: end; justify-self: stretch; vertical-align: middle; text-align: center; margin: 10px; grid-row: 1; grid-column: 1;}
+      
 
       #preview { max-width: 100%; max-height: 100%; }
 
     </style>
   </head>
-  <body>
-
+  <body id="body">
     <div class="grid">
-      <div class="item"></div>
+      
       <div class="item"><img src="logo-tr_eng.png"/></div>
       <div class="item"><video id="preview"></video></div>
       <div class="item" style="color: #FFFFFF;">Please Scan QR-Code</div>
-      <div class="item"></div>
-    </div>
-
-
-    <script type="text/javascript">
-	//document.body.requestFullscreen();
+      
+    </div>    
+    <script type="text/javascript">    
       let scanner = new Instascan.Scanner({ 
         video: document.getElementById('preview'),
         mirror: false
-        });
+      });
       scanner.addListener('scan', function (content) {
         parent.location.href = content;
       });
@@ -97,6 +89,17 @@
       }).catch(function (e) {
         console.error(e);
       });
+        
+      // function requestFullScreen(element) {
+      //   // Supports most browsers and their versions.
+      //   var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+  
+      //   if (requestMethod) { // Native full screen.
+      //       requestMethod.call(element);
+      //   }
+      // }
     </script>
+    
   </body>
+  
 </html>
